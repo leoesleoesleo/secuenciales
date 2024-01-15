@@ -1,0 +1,33 @@
+[{
+    "name_job": "JP_CD_CRI_FECHA_NACIMIENTO",
+    "priority": 1,
+    "last_run": "success"
+}, {
+    "name_job": "JP_CD_CRI_TELEFONO",
+    "priority": 2,
+    "last_run": "success"
+}, {
+    "name_job": "JP_CD_CRI_NOMBRES",
+    "priority": 2,
+    "last_run": "success"
+}, {
+    "name_job": "JP_CD_CRI_TIPOS",
+    "priority": 4,
+    "last_run": "success"
+}, {
+    "name_job": "JP_CD_CRI_CORREOS",
+    "priority": 5,
+    "last_run": "success"
+}, {
+    "name_job": "JP_CD_CRI_UBICACION",
+    "priority": 6,
+    "last_run": "error"
+}, {
+    "name_job": "JP_CD_CRI_NUM_IDENT",
+    "priority": 6,
+    "last_run": "success"
+}, {
+    "name_job": "JP_CD_CRI_CODIGO_CIF_UNIFICADO",
+    "priority": 7,
+    "last_run": "success"
+}]
