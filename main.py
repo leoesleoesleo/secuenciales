@@ -1,41 +1,24 @@
 import concurrent.futures
 import random
+import json
 from datetime import datetime
 #from concurrent.futures import ThreadPoolExecutor
 
-JSON_JOBS = [{
-    "name_job": "JP_CD_CRI_FECHA_NACIMIENTO",
-    "priority": 1,
-    "last_run": "success"
-}, {
-    "name_job": "JP_CD_CRI_TELEFONO",
-    "priority": 2,
-    "last_run": "success"
-}, {
-    "name_job": "JP_CD_CRI_NOMBRES",
-    "priority": 2,
-    "last_run": "success"
-}, {
-    "name_job": "JP_CD_CRI_TIPOS",
-    "priority": 4,
-    "last_run": "error"
-}, {
-    "name_job": "JP_CD_CRI_CORREOS",
-    "priority": 5,
-    "last_run": "success"
-}, {
-    "name_job": "JP_CD_CRI_UBICACION",
-    "priority": 6,
-    "last_run": "success"
-}, {
-    "name_job": "JP_CD_CRI_NUM_IDENT",
-    "priority": 6,
-    "last_run": "success"
-}, {
-    "name_job": "JP_CD_CRI_CODIGO_CIF_UNIFICADO",
-    "priority": 7,
-    "last_run": "success"
-}]
+
+def load_file_json(ruta):
+  try:
+    with open(ruta, 'r') as archivo:
+      datos = json.load(archivo)
+      return datos
+  except FileNotFoundError:
+    print(f"El archivo '{ruta}' no se encontró.")
+  except json.JSONDecodeError:
+    print(
+        f"Error al decodificar el JSON en '{ruta}'. Asegúrate de que el archivo JSON sea válido."
+    )
+
+
+JSON_JOBS = load_file_json("secuencial.json")
 
 
 def execute_job(job):
@@ -56,18 +39,16 @@ def execute_job(job):
     return True
 
 
-# Agrupa los trabajos por prioridad
+"""Agrupa los trabajos por prioridad"""
 priority_jobs = {}
 for job in JSON_JOBS:
   priority = job["priority"]
   if priority not in priority_jobs:
     priority_jobs[priority] = []
   priority_jobs[priority].append(job)
-
-# Ordena las prioridades de menor a mayor
+"""Ordena las prioridades de menor a mayor"""
 sorted_priorities = sorted(priority_jobs.keys())
-
-# Ejecuta los trabajos secuencialmente y los de la misma prioridad en paralelo
+"""Ejecuta los trabajos secuencialmente y los de la misma prioridad en paralelo"""
 error_occurred = False
 with concurrent.futures.ThreadPoolExecutor() as executor:
   for priority in sorted_priorities:
