@@ -11,6 +11,7 @@ setup(
         # Lista de dependencias si las hay
     ],
     scripts=['secuenciales.py'],
+    data_files=[('', ['secuencial.json'])],
     license='MIT',
     url='https://github.com/leoesleoesleo/secuenciales',
 )
