@@ -3,9 +3,7 @@
 # Standar Library
 import random
 import json
-from datetime import datetime
 import subprocess
-#from concurrent.futures import ThreadPoolExecutor
 
 # Internal Library
 from settings import logger
@@ -29,10 +27,8 @@ def execute_job(job):
   if job["last_run"] == "error":
     return False
   else:
-    start_time = datetime.now()
     logger.info(
-        f"EJECUTANDO EL JOB: {job['name_job']} PRIORIDAD: {job['priority']} - Hora de inicio: {start_time}"
-    )
+        f"EJECUTANDO EL JOB: {job['name_job']} PRIORIDAD: {job['priority']}")
 
     command = "ls -l"
     resultado, retorno = run_command_in_shell(command=command,
@@ -40,11 +36,8 @@ def execute_job(job):
     print(f"Resultado:\n{resultado}")
     print(f"Código de retorno: {retorno}")
 
-    end_time = datetime.now()
-    wait_time = random.uniform(2, 8)
-
     logger.info(
-        f"  -> TERMINADO EL JOB: {job['name_job']} PRIORIDAD: {job['priority']} - Hora de fin: {end_time} - TIEMPO: {wait_time} SEGUNDOS)"
+        f"  -> TERMINADO EL JOB: {job['name_job']} PRIORIDAD: {job['priority']}"
     )
     return True
 
